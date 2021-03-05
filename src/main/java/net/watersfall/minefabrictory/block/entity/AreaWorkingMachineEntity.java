@@ -13,7 +13,7 @@ import net.watersfall.minefabrictory.block.MachineBlock;
 public abstract class AreaWorkingMachineEntity extends BlockEntity implements BlockEntityClientSerializable
 {
 	private Box workingArea;
-	private int range;
+	private boolean showWorkingArea = false;
 
 	public AreaWorkingMachineEntity(BlockEntityType<?> type)
 	{
@@ -55,6 +55,11 @@ public abstract class AreaWorkingMachineEntity extends BlockEntity implements Bl
 		}
 	}
 
+	public boolean shouldRenderWorkingArea()
+	{
+		return this.showWorkingArea;
+	}
+
 	public Box getWorkingArea()
 	{
 		return this.workingArea;
@@ -63,6 +68,11 @@ public abstract class AreaWorkingMachineEntity extends BlockEntity implements Bl
 	public int getRange()
 	{
 		return 3;
+	}
+
+	public void setShowWorkingArea(boolean showWorkingArea)
+	{
+		this.showWorkingArea = showWorkingArea;
 	}
 
 	@Override

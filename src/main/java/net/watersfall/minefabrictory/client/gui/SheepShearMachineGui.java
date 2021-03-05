@@ -1,5 +1,6 @@
 package net.watersfall.minefabrictory.client.gui;
 
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -9,6 +10,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.watersfall.minefabrictory.MineFabrictory;
+import net.watersfall.minefabrictory.block.entity.AreaWorkingMachineEntity;
 import net.watersfall.minefabrictory.screen.SheepShearMachineScreen;
 
 public class SheepShearMachineGui extends HandledScreen<SheepShearMachineScreen>
@@ -29,10 +31,12 @@ public class SheepShearMachineGui extends HandledScreen<SheepShearMachineScreen>
 		this.playerInventoryTitleY += 2;
 		super.init();
 		this.addButton(new TexturedButtonWidget(this.x + 122, this.y + 35, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE, (button) -> {
-			int x1 = this.handler.getPos().getX();
-			int y1 = this.handler.getPos().getY();
-			int z1 = this.handler.getPos().getZ();
-			MinecraftClient.getInstance().player.sendMessage(new LiteralText(String.format("%d, %d, %d", x1, y1, z1)), false);
+			BlockEntity test = client.world.getBlockEntity(this.handler.getPos());
+			if(test instanceof AreaWorkingMachineEntity)
+			{
+				AreaWorkingMachineEntity entity = (AreaWorkingMachineEntity)test;
+				entity.setShowWorkingArea(!entity.shouldRenderWorkingArea());
+			}
 		}));
 	}
 

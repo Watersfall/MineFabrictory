@@ -20,7 +20,7 @@ public class AreaWorkingMachineEntityRenderer<T extends AreaWorkingMachineEntity
 	@Override
 	public void render(AreaWorkingMachineEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay)
 	{
-		if(entity.getWorkingArea() != null)
+		if(entity.getWorkingArea() != null && entity.shouldRenderWorkingArea())
 		{
 			matrices.push();
 			WorldRenderer.drawBox(matrices, vertexConsumers.getBuffer(RenderLayer.getLines()), entity.getWorkingArea(), 1, 0, 0, 1);
