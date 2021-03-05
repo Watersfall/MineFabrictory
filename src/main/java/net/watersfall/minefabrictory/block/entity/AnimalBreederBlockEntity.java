@@ -1,7 +1,10 @@
 package net.watersfall.minefabrictory.block.entity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.watersfall.minefabrictory.inventory.BasicInventory;
@@ -80,5 +83,19 @@ public class AnimalBreederBlockEntity extends AreaWorkingMachineEntity implement
 	public DefaultedList<ItemStack> getContents()
 	{
 		return this.contents;
+	}
+
+	@Override
+	public void fromTag(BlockState state, CompoundTag tag)
+	{
+		super.fromTag(state, tag);
+		Inventories.fromTag(tag, this.contents);
+	}
+
+	@Override
+	public CompoundTag toTag(CompoundTag tag)
+	{
+		super.toTag(tag);
+		return Inventories.toTag(tag, this.contents);
 	}
 }
