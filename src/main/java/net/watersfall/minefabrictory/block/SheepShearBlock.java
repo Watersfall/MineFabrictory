@@ -6,25 +6,23 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.watersfall.minefabrictory.block.entity.AreaWorkingMachineEntity;
 import net.watersfall.minefabrictory.block.entity.SheepShearBlockEntity;
 import net.watersfall.minefabrictory.screen.SheepShearMachineScreen;
 import org.jetbrains.annotations.Nullable;
 
-public class SheepShearBlock extends MachineBlock implements InventoryProvider, BlockEntityProvider
+public class SheepShearBlock extends WorkingAreaMachineBlock implements InventoryProvider, BlockEntityProvider
 {
 	public SheepShearBlock()
 	{
@@ -50,41 +48,14 @@ public class SheepShearBlock extends MachineBlock implements InventoryProvider, 
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
+	protected ExtendedScreenHandlerFactory createScreenHandlerFactory(BlockPos pos, AreaWorkingMachineEntity entity)
 	{
-		BlockEntity test = world.getBlockEntity(pos);
-		if(test instanceof SheepShearBlockEntity)
+		return new WorkingAreaHandlerFactory(pos, new TranslatableText(this.getTranslationKey()))
 		{
-			if(!world.isClient)
-			{
-				SheepShearBlockEntity entity = (SheepShearBlockEntity)test;
-				player.openHandledScreen(createScreenHandlerFactory(pos, entity));
-			}
-			return ActionResult.success(world.isClient);
-		}
-		return ActionResult.PASS;
-	}
-
-	private ExtendedScreenHandlerFactory createScreenHandlerFactory(BlockPos pos, SheepShearBlockEntity entity)
-	{
-		return new ExtendedScreenHandlerFactory()
-		{
-			@Override
-			public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf)
-			{
-				buf.writeBlockPos(pos);
-			}
-
 			@Override
 			public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player)
 			{
-				return new SheepShearMachineScreen(syncId, entity, inventory, pos);
-			}
-
-			@Override
-			public Text getDisplayName()
-			{
-				return new LiteralText("Test");
+				return new SheepShearMachineScreen(syncId, (Inventory)entity, inventory, pos);
 			}
 		};
 	}
