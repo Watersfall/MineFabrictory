@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import net.watersfall.minefabrictory.block.MachineBlock;
 
 public abstract class AreaWorkingMachineEntity extends BlockEntity implements BlockEntityClientSerializable
@@ -18,13 +19,6 @@ public abstract class AreaWorkingMachineEntity extends BlockEntity implements Bl
 	public AreaWorkingMachineEntity(BlockEntityType<?> type)
 	{
 		super(type);
-	}
-
-	@Override
-	public void fromTag(BlockState state, CompoundTag tag)
-	{
-		super.fromTag(state, tag);
-		this.calculateBox(state);
 	}
 
 	public void calculateBox(BlockState state)
@@ -52,6 +46,7 @@ public abstract class AreaWorkingMachineEntity extends BlockEntity implements Bl
 				direction2 = Direction.SOUTH;
 			}
 			this.workingArea = new Box(startPos.offset(direction, range).offset(direction2.getOpposite(), range / 2), startPos.up().offset(direction2, Math.round(range / 2F)));
+			this.sync();
 		}
 	}
 
@@ -62,6 +57,10 @@ public abstract class AreaWorkingMachineEntity extends BlockEntity implements Bl
 
 	public Box getWorkingArea()
 	{
+		if(this.workingArea == null)
+		{
+			this.calculateBox(this.world.getBlockState(pos));
+		}
 		return this.workingArea;
 	}
 

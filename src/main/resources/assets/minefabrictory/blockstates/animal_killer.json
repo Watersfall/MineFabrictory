@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "minefabrictory:block/animal_killer"
+		},
+		"facing=south": {
+			"model": "minefabrictory:block/animal_killer",
+			"y": 180
+		},
+		"facing=east": {
+			"model": "minefabrictory:block/animal_killer",
+			"y": 90
+		},
+		"facing=west": {
+			"model": "minefabrictory:block/animal_killer",
+			"y": 270
+		}
+	}
+}

@@ -1,4 +1,5 @@
 {
 	"block.minefabrictory.sheep_shear": "Sheep Shearing Machine",
-	"block.minefabrictory.animal_breeder": "Animal Breeding Machine"
+	"block.minefabrictory.animal_breeder": "Animal Breeding Machine",
+	"block.minefabrictory.animal_killer": "Animal Killing Machine"
 }

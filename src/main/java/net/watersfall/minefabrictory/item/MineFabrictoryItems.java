@@ -11,16 +11,19 @@ public class MineFabrictoryItems
 {
 	public static final BlockItem SHEEP_SHEAR_ITEM;
 	public static final BlockItem ANIMAL_BREEDER_ITEM;
+	public static final BlockItem ANIMAL_KILLER_ITEM;
 
 	static
 	{
 		SHEEP_SHEAR_ITEM = new BlockItem(MineFabrictoryBlocks.SHEEP_SHEAR_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
 		ANIMAL_BREEDER_ITEM = new BlockItem(MineFabrictoryBlocks.ANIMAL_BREEDER_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
+		ANIMAL_KILLER_ITEM = new BlockItem(MineFabrictoryBlocks.ANIMAL_KILLER_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS));
 	}
 
 	public static void register()
 	{
 		Registry.register(Registry.ITEM, MineFabrictory.getId("sheep_shear"), SHEEP_SHEAR_ITEM);
 		Registry.register(Registry.ITEM, MineFabrictory.getId("animal_breeder"), ANIMAL_BREEDER_ITEM);
+		Registry.register(Registry.ITEM, MineFabrictory.getId("animal_killer"), ANIMAL_KILLER_ITEM);
 	}
 }

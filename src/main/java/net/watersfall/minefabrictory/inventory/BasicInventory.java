@@ -104,17 +104,20 @@ public interface BasicInventory extends SidedInventory
 			this.setStack(slot, stack.copy());
 			return ItemStack.EMPTY;
 		}
-		if(current.getCount() + stack.getCount() > 64)
+		else if(this.getStack(slot).getItem() == stack.getItem())
 		{
-			stack.setCount(stack.getCount() - (64 - current.getCount()));
-			current.setCount(64);
+			if(current.getCount() + stack.getCount() > 64)
+			{
+				stack.setCount(stack.getCount() - (64 - current.getCount()));
+				current.setCount(64);
+			}
+			else
+			{
+				current.setCount(current.getCount() + stack.getCount());
+				stack.setCount(0);
+			}
+			this.setStack(slot, current);
 		}
-		else
-		{
-			current.setCount(current.getCount() + stack.getCount());
-			stack.setCount(0);
-		}
-		this.setStack(slot, current);
 		return stack;
 	}
 
