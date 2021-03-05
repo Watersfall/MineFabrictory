@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "minefabrictory",
+	"version": "${version}",
+	"name": "MineFabrictory",
+	"description": "Useful automation machines",
+	"authors": [
+		"Watersfall"
+	],
+	"contact": {
+		"website": "https://github.com/Watersfall/",
+		"repo": "https://github.com/Watersfall/"
+	},
+	"license": "GLPv3",
+	"icon": "assets/minefabrictory/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"net.watersfall.minefabrictory.client.MineFabrictoryClient"
+		],
+		"main": [
+			"net.watersfall.minefabrictory.MineFabrictory"
+		]
+	},
+	"mixins": [
+		"minefabrictory.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.11.2",
+		"fabric": "*",
+		"minecraft": "1.16.5"
+	}
+}
