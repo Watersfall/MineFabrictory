@@ -38,24 +38,16 @@ public interface BasicInventory extends SidedInventory
 	@Override
 	default ItemStack getStack(int slot)
 	{
-		return getContents().get(slot).copy();
+		return getContents().get(slot);
 	}
 
 	@Override
 	default ItemStack removeStack(int slot, int amount)
 	{
-		ItemStack stack = getStack(slot);
-		if(stack.getCount() <= amount)
-		{
-			return removeStack(slot);
-		}
-		else
-		{
-			stack.decrement(amount);
-			ItemStack returnStack = new ItemStack(stack.getItem(), amount);
-			this.setStack(slot, stack);
-			return returnStack;
-		}
+		ItemStack currentStack = getContents().get(slot);
+		ItemStack returnStack = new ItemStack(currentStack.getItem(), amount);
+		currentStack.decrement(amount);
+		return returnStack;
 	}
 
 	@Override
