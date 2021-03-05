@@ -16,7 +16,7 @@ import net.watersfall.minefabrictory.mixin.SheepEntityAccessor;
 
 import java.util.List;
 
-public class SheepShearBlockEntity extends BlockEntity implements Tickable, BasicInventory
+public class SheepShearBlockEntity extends AreaWorkingMachineEntity implements Tickable, BasicInventory
 {
 	private final DefaultedList<ItemStack> contents;
 
@@ -33,7 +33,7 @@ public class SheepShearBlockEntity extends BlockEntity implements Tickable, Basi
 		{
 			if(this.world.getTime() % 20 == 0)
 			{
-				List<SheepEntity> entities = this.world.getEntitiesByType(EntityType.SHEEP, new Box(this.pos, this.pos.add(10, 10, 10)), (entity) -> true);
+				List<SheepEntity> entities = this.world.getEntitiesByType(EntityType.SHEEP, this.getWorkingArea(), (entity) -> true);
 				for(SheepEntity entity : entities)
 				{
 					if(entity.isShearable())
