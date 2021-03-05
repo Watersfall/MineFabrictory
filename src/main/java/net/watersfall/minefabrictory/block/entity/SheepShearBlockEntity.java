@@ -1,10 +1,13 @@
 package net.watersfall.minefabrictory.block.entity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Box;
@@ -48,12 +51,27 @@ public class SheepShearBlockEntity extends BlockEntity implements Tickable, Basi
 						if(stack.getCount() != amount)
 						{
 							entity.setSheared(true);
+							this.markDirty();
 							break;
 						}
 					}
 				}
 			}
 		}
+	}
+
+	@Override
+	public void fromTag(BlockState state, CompoundTag tag)
+	{
+		super.fromTag(state, tag);
+		Inventories.fromTag(tag, this.getContents());
+	}
+
+	@Override
+	public CompoundTag toTag(CompoundTag tag)
+	{
+		super.toTag(tag);
+		return Inventories.toTag(tag, this.getContents());
 	}
 
 	@Override

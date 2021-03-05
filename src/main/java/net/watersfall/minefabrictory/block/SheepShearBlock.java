@@ -58,14 +58,14 @@ public class SheepShearBlock extends MachineBlock implements InventoryProvider, 
 			if(!world.isClient)
 			{
 				SheepShearBlockEntity entity = (SheepShearBlockEntity)test;
-				player.openHandledScreen(createScreenHandlerFactory(pos));
+				player.openHandledScreen(createScreenHandlerFactory(pos, entity));
 			}
 			return ActionResult.success(world.isClient);
 		}
 		return ActionResult.PASS;
 	}
 
-	private ExtendedScreenHandlerFactory createScreenHandlerFactory(BlockPos pos)
+	private ExtendedScreenHandlerFactory createScreenHandlerFactory(BlockPos pos, SheepShearBlockEntity entity)
 	{
 		return new ExtendedScreenHandlerFactory()
 		{
@@ -78,7 +78,7 @@ public class SheepShearBlock extends MachineBlock implements InventoryProvider, 
 			@Override
 			public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player)
 			{
-				return new SheepShearMachineScreen(syncId, new SimpleInventory(12), inventory, pos);
+				return new SheepShearMachineScreen(syncId, entity, inventory, pos);
 			}
 
 			@Override
