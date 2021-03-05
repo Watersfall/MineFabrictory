@@ -4,6 +4,7 @@
 	"package": "net.watersfall.minefabrictory.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
+		"SheepEntityAccessor"
 	],
 	"client": [
 	],
