@@ -10,7 +10,7 @@ import net.minecraft.world.WorldAccess;
 import net.watersfall.minefabrictory.block.entity.SheepShearBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-public class SheepShearBlock extends Block implements InventoryProvider, BlockEntityProvider
+public class SheepShearBlock extends MachineBlock implements InventoryProvider, BlockEntityProvider
 {
 	public SheepShearBlock()
 	{

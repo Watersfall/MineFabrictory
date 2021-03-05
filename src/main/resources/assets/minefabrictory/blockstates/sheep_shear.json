@@ -1,7 +1,19 @@
 {
 	"variants": {
-		"": {
+		"facing=north": {
 			"model": "minefabrictory:block/sheep_shear"
+		},
+		"facing=south": {
+			"model": "minefabrictory:block/sheep_shear",
+			"y": 180
+		},
+		"facing=east": {
+			"model": "minefabrictory:block/sheep_shear",
+			"y": 90
+		},
+		"facing=west": {
+			"model": "minefabrictory:block/sheep_shear",
+			"y": 270
 		}
 	}
 }
