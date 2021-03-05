@@ -25,9 +25,9 @@ public class SheepShearMachineScreen extends ScreenHandler
 
 		//Machine Inventory
 		byte index = 0;
-		for(int x = 0; x < 4; x++)
+		for(int y = 0; y < 4; y++)
 		{
-			for(int y = 0; y < 3; y++)
+			for(int x = 0; x < 3; x++)
 			{
 				this.addSlot(new Slot(inventory, index, 8 + (x * 18), 18 + (y * 18)));
 				index++;
