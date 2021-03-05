@@ -2,11 +2,11 @@ package net.watersfall.minefabrictory.block;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.InventoryProvider;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -15,10 +15,10 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.watersfall.minefabrictory.block.entity.AreaWorkingMachineEntity;
-import org.jetbrains.annotations.Nullable;
 
-public abstract class WorkingAreaMachineBlock extends MachineBlock
+public abstract class WorkingAreaMachineBlock extends MachineBlock implements InventoryProvider
 {
 	public WorkingAreaMachineBlock(Settings settings)
 	{
@@ -41,7 +41,18 @@ public abstract class WorkingAreaMachineBlock extends MachineBlock
 		return ActionResult.PASS;
 	}
 
-	 protected abstract ExtendedScreenHandlerFactory createScreenHandlerFactory(BlockPos pos, AreaWorkingMachineEntity entity);
+	@Override
+	public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos)
+	{
+		BlockEntity test = world.getBlockEntity(pos);
+		if(test instanceof SidedInventory)
+		{
+			return (SidedInventory)test;
+		}
+		return null;
+	}
+
+	protected abstract ExtendedScreenHandlerFactory createScreenHandlerFactory(BlockPos pos, AreaWorkingMachineEntity entity);
 
 	public abstract class WorkingAreaHandlerFactory implements ExtendedScreenHandlerFactory
 	{

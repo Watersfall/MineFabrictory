@@ -18,5 +18,6 @@ public class MineFabrictoryClient implements ClientModInitializer
 	{
 		ScreenRegistry.register(MineFabrictoryScreenHandlers.SHEEP_SHEAR_MACHINE_SCREEN_HANDLER, SheepShearMachineGui::new);
 		BlockEntityRendererRegistry.INSTANCE.register(MineFabrictoryBlockEntities.SHEEP_SHEAR_ENTITY, AreaWorkingMachineEntityRenderer::new);
+		BlockEntityRendererRegistry.INSTANCE.register(MineFabrictoryBlockEntities.ANIMAL_BREEDER_ENTITY, AreaWorkingMachineEntityRenderer::new);
 	}
 }
